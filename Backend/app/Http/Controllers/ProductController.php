@@ -147,5 +147,26 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        try{
+
+            if($product->image){
+                $exists = Storage::disk('public')->exists('public/image/{$product->image}');
+                if($exists){
+                    Storage::disk('public')->delete('public/image/{$product->image}');
+                }
+            }
+
+            $product->delete();
+
+            return response()->json([
+                'message' => 'Product delete Success'
+            ]);
+
+        } catch(\Exception $e){
+            \Log::error($e->getMessage());
+            return response()->json([
+                'message' => 'Delete Wrong'
+            ], 500);
+        }
     }
 }

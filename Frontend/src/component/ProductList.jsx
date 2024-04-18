@@ -18,6 +18,37 @@ function ProductList() {
         })
     }
 
+    const deleteProduct = async (id) => {
+        const isConfirm = await Swal.fire({
+            title: "Are you sure ?",
+            text: "You won't be able to revert this",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete it!!!"
+        }).then((result) => {
+            return result.isConfirmed
+        })
+
+        if(!isConfirm){
+            return;
+        }
+
+        await axios.delete(`http://localhost:8000/api/products/${id}`).then(({data}) => {
+            Swal.fire({
+                icon: 'success',
+                text: data.message
+            })
+            fetchProduct();
+        }).catch(({response:{data}})=>{
+            Swal.fire({
+                text: data.message,
+                icon: 'error'
+            })
+        })
+    }
+
   return (
     <div className='container'>
         <div className="row">
