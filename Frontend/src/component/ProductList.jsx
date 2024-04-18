@@ -39,12 +39,12 @@ function ProductList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {products.length > 0 ?(
-                                    products.map((row, key) => {
+                                {products.length > 0 ? (
+                                    products.map((row, key) => (
                                         <tr key={key}>
                                             <td>{row.title}</td>
                                             <td>{row.description}</td>
-                                            <td><img width="50px" src={`http://localhost:8000/stroge/product/image/${row.image}`} alt="" /></td>
+                                            <td><img width="50px" src={`http://localhost:8000/storage/product/image/${row.image}`} alt="" /></td>
                                             <td>
                                                 <Link to={`/product/edit/${row.id}`} className='btn btn-success me-2'>
                                                     Edit
@@ -54,7 +54,7 @@ function ProductList() {
                                                 </Button>       
                                             </td>
                                         </tr>
-                                    })
+                                    ))
                                 ) : (
                                     <tr>
                                         <td colSpan="4">No product Found</td>
