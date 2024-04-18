@@ -53,9 +53,10 @@ function ProductList() {
     <div className='container'>
         <div className="row">
             <div className="col-12">
-                <Link className='btn btn-primary mb-2 float-end' to={"/product/create"}>
+                <Link className='btn btn-primary mb-2 float-start' to={"/product/create"}>
                     Create Product
                 </Link>
+                <input type="search" className='float-end' name='search' />
             </div>
             <div className="col-12">
                 <div className="card card-body">
