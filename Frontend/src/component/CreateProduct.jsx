@@ -18,7 +18,7 @@ function CreateProduct() {
     }
 
     const createProduct = async (e) => {
-        e.prevenDefault();
+        e.preventDefault();
 
         const formData = new FormData();
 
