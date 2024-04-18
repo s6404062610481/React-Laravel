@@ -10,6 +10,7 @@ import { Col } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import ProductList from './component/ProductList'
 import CreateProduct from './component/CreateProduct';
+import EditProduct from './component/EditProduct';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
                         <Routes>
                             <Route exact path='/' element={<ProductList/>} />
                             <Route exact path='/product/create' element={<CreateProduct/>} />
+                            <Route exact path='/product/edit/:id' element={<EditProduct/>} />
                         </Routes>
                     </Col>
                 </Row>
