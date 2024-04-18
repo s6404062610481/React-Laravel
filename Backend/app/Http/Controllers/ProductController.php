@@ -98,6 +98,44 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'image'=>'nullable'
+        ]);
+
+        try{
+            $product->fill($request->post())->update();
+            
+            if( $request -> hasFile('image')){
+                //remove old image
+                if($product->image){
+                    $exists = Storage::disk('public')->exists('public/image/{$product->image}');
+                    if($exists){
+                        Storage::disk('public')->delete('public/image/{$product->image}');
+                    }
+                }
+                $imageName = Str::random() . '.' . $request->image->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('product/image', $request->image, $imageName);
+                $product->image = $imageName;
+                $product->save();
+
+                return response()->json([
+                    'message' => 'Product Update Success'
+                ]);
+
+            }else{
+                return response()->json([
+                    'message' => 'Product Update Success'
+                ]);
+            }
+
+        } catch(\Exception $e){
+            \Log::error($e->getMessage());
+            return response()->json([
+                'message' => 'Update Wrong'
+            ], 500);
+        }
     }
 
     /**

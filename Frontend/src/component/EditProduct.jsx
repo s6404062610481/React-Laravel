@@ -35,6 +35,37 @@ function EditProduct() {
         setImage(event.target.files[0]);
     }
 
+    const updateProduct = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append('_method', 'PATCH')
+        formData.append('title', title)
+        formData.append('description', description)
+        if (image !== null) {
+            formData.append('image', image);
+        }
+
+        await axios.post(`http://localhost:8000/api/products/${id}`, formData).then(({data}) => {
+            Swal.fire({
+                icon: 'success',
+                text: data.message
+            })
+            navigate('/')
+        }).catch(({response}) => {
+            if(response.status === 422){
+                setValidationError(response.data.errors)
+            }else{
+                Swal.fire({
+                    text: response.data.message,
+                    icon: "error"
+                })
+            }
+        })
+
+    }
+
   return (
     <div className='container'>
         <div className="row justify-content-center">
@@ -57,7 +88,7 @@ function EditProduct() {
                                     </div>
                                 </div>
                             )}
-                            <Form>
+                            <Form onSubmit={updateProduct}>
                                 <Row>
                                     <Col>
                                         <Form.Group controlId='Name'>
