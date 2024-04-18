@@ -13,7 +13,7 @@ function ProductList() {
     }, []);
 
     const fetchProduct = async () => {
-        await axios.get(`http://localhost:8000/console/products`).then(({data}) => {
+        await axios.get(`http://localhost:8000/api/products`).then(({data}) => {
             setProducts(data);
         })
     }

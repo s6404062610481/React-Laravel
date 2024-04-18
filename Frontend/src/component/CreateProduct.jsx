@@ -12,11 +12,9 @@ function CreateProduct() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState();
     const [validationError, setValidationError] = useState({});
-    
-    console.log(title)
 
     const changeHandler = (event) => {
-        setImage(event.target.flie[0]);
+        setImage(event.target.files[0]);
     }
 
     const createProduct = async (e) => {
@@ -24,11 +22,11 @@ function CreateProduct() {
 
         const formData = new FormData();
 
-        formData.append('Title', title);
-        formData.append('Description', description);
+        formData.append('title', title);
+        formData.append('description', description);
         formData.append('image', image);
 
-        await axios.post(`http://localhost:8000/console/products`, formData).then(({data}) => {
+        await axios.post(`http://localhost:8000/api/products`, formData).then(({data}) => {
             Swal.fire({
                 icon:"success",
                 text: data.message
