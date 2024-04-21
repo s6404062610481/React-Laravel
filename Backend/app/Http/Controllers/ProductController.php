@@ -173,15 +173,15 @@ class ProductController extends Controller
 
     function search($key){
 
-        return Product::where('title','Like','%'.$key.'%')->get();
+        // return Product::where('title','Like','%'.$key.'%')->get();
         // return $key;
         
-    //     if(empty($key)){
-    //         $all_products = Product::where('id','>=',1);
-    //     } else {
-    //         $all_products = Product::where('title','Like','%'.$key.'%')->get();
-    //     }
+        if(!empty($key)){
+            $all_products = Product::where('title','Like','%'.$key.'%')->get();
+        } else {
+            $all_products = Product::select('*')->get();
+        }
 
-    //     return $all_products->orderBy('id','ASC')->get();
+        return $all_products;
     }
 }
