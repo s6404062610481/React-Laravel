@@ -49,6 +49,14 @@ function ProductList() {
         })
     }
 
+    async function search(key){
+        console.warn(key);
+
+        let result = await fetch('http://localhost:8000/api/search/'+key);
+        result = await result.json();
+        setProducts(result)
+    }
+
   return (
     <div className='container'>
         <div className="row">
@@ -56,7 +64,7 @@ function ProductList() {
                 <Link className='btn btn-primary mb-2 float-start' to={"/product/create"}>
                     Create Product
                 </Link>
-                <input type="search" className='float-end' name='search' />
+                <input type="search" className='float-end' name='search' onChange={(e) => search(e.target.value)} />
             </div>
             <div className="col-12">
                 <div className="card card-body">

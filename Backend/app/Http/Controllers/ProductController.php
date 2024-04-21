@@ -169,4 +169,22 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+
+    function search($key){
+        // return Product::where('title','Like','%$key%')->get();
+        return Product::where('title','Like','%'.$key.'%')->get();
+        // return $key;
+        // $post = '';
+        // $post = Product::where('title','Like','%$key%')->get();
+
+        // $post = $post->map(function ($post, $key){
+        //     return [
+        //         'title' => $post['title'],
+        //         'description' => $post['description'],
+        //     ];
+        // });
+
+        // return $post;
+    }
 }
