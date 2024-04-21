@@ -172,19 +172,16 @@ class ProductController extends Controller
 
 
     function search($key){
-        // return Product::where('title','Like','%$key%')->get();
+
         return Product::where('title','Like','%'.$key.'%')->get();
         // return $key;
-        // $post = '';
-        // $post = Product::where('title','Like','%$key%')->get();
+        
+    //     if(empty($key)){
+    //         $all_products = Product::where('id','>=',1);
+    //     } else {
+    //         $all_products = Product::where('title','Like','%'.$key.'%')->get();
+    //     }
 
-        // $post = $post->map(function ($post, $key){
-        //     return [
-        //         'title' => $post['title'],
-        //         'description' => $post['description'],
-        //     ];
-        // });
-
-        // return $post;
+    //     return $all_products->orderBy('id','ASC')->get();
     }
 }
