@@ -64,7 +64,7 @@ function ProductList() {
                 <Link className='btn btn-primary mb-2 float-start' to={"/product/create"}>
                     Create Product
                 </Link>
-                <input type="search" className='float-end' name='search' onChange={(e) => search(e.target.value)} />
+                <input type="search" className='float-end' name='search' onChange={(e) => search(e.target.value)} placeholder='Search'/>
             </div>
             <div className="col-12">
                 <div className="card card-body">
